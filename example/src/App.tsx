@@ -11,8 +11,23 @@ import { FScreen } from './screens/FScreen';
 import { GScreen } from './screens/GScreen';
 import { HScreen } from './screens/HScreen';
 
-const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator();
+export type TabParamList = {
+  Left: undefined;
+  Right: undefined;
+}
+const Tab = createBottomTabNavigator<TabParamList>();
+
+export  type StackParamList = {
+  A: undefined;
+  B: undefined;
+  C: undefined;
+  D: undefined;
+  E: undefined;
+  F: undefined;
+  G: undefined;
+  H: undefined;
+}
+const Stack = createNativeStackNavigator<StackParamList>();
 
 function LeftBottomTab() {
   return (
