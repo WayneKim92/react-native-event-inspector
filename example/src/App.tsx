@@ -9,7 +9,6 @@ import { EScreen } from './screens/EScreen';
 import { FScreen } from './screens/FScreen';
 import { GScreen } from './screens/GScreen';
 import { HScreen } from './screens/HScreen';
-import { IScreen } from './screens/IScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,7 +24,6 @@ export default function App() {
         <Stack.Screen name='F' component={FScreen} />
         <Stack.Screen name='G' component={GScreen} />
         <Stack.Screen name='H' component={HScreen} />
-        <Stack.Screen name='I' component={IScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
