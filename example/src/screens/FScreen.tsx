@@ -9,6 +9,7 @@ export function FScreen() {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>FFFFFFFF</Text>
       <Button title={'Go to G'} onPress={() => { navigation.navigate('G')}} />
+      <Button title={'Go to H'} onPress={() => { navigation.navigate('H')}} />
     </View>
   );
 }

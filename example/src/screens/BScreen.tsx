@@ -10,6 +10,9 @@ export function BScreen() {
       <Button title={'Go to C'} onPress={() => {
         navigation.navigate('C');
       }} />
+      <Button title={'Go to D'} onPress={() => {
+        navigation.navigate('D');
+      }} />
     </View>
   );
 }

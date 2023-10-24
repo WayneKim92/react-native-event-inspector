@@ -10,6 +10,12 @@ export function AScreen() {
       <Button title={'Go to B'} onPress={() => {
         navigation.navigate('B');
       }} />
+      <Button title={'Go to C'} onPress={() => {
+        navigation.navigate('C');
+      }} />
+      <Button title={'Go to D'} onPress={() => {
+        navigation.navigate('D');
+      }} />
     </View>
   );
 }
