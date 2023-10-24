@@ -1,31 +1,32 @@
 import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { AScreen } from './screens/AScreen';
+import { BScreen } from './screens/BScreen';
+import { CScreen } from './screens/CScreen';
+import { DScreen } from './screens/DScreen';
+import { EScreen } from './screens/EScreen';
+import { FScreen } from './screens/FScreen';
+import { GScreen } from './screens/GScreen';
+import { HScreen } from './screens/HScreen';
+import { IScreen } from './screens/IScreen';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-event-inspector';
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
-
   return (
-    <View style={styles.container}>
-      <Text>Result: {result}</Text>
-    </View>
+    <NavigationContainer>{/* Rest of your app code */}
+      <Stack.Navigator>
+        <Stack.Screen name='A' component={AScreen} />
+        <Stack.Screen name='B' component={BScreen} />
+        <Stack.Screen name='C' component={CScreen} />
+        <Stack.Screen name='D' component={DScreen} />
+        <Stack.Screen name='E' component={EScreen} />
+        <Stack.Screen name='F' component={FScreen} />
+        <Stack.Screen name='G' component={GScreen} />
+        <Stack.Screen name='H' component={HScreen} />
+        <Stack.Screen name='I' component={IScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
-});
