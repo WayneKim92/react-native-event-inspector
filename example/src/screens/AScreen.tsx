@@ -29,30 +29,28 @@ export function AScreen() {
             justifyContent: 'space-between',
           }}
         >
-          <View
-            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
-          >
+          <EventView nativeID={'gold-box'}>
             <View
-              style={{ width: 30, height: 30, backgroundColor: '#111111' }}
-            />
-            <View
-              style={{ width: 30, height: 30, backgroundColor: '#444444' }}
-            />
-          </View>
-          <View
-            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
-          >
-            <View
-              style={{ width: 30, height: 30, backgroundColor: '#777777' }}
-            />
-            <View
-              style={{ width: 30, height: 30, backgroundColor: '#AAAAAA' }}
-            />
-          </View>
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                backgroundColor: 'gold',
+              }}
+            >
+              <EventView nativeID={'blue-box'}>
+                <View
+                  style={{ width: 30, height: 30, backgroundColor: 'blue' }}
+                />
+              </EventView>
+              <View style={{ width: 30, height: 30, backgroundColor: 'red' }} />
+              <EventView nativeID={'green-box'}>
+                <View
+                  style={{ width: 30, height: 30, backgroundColor: 'green' }}
+                />
+              </EventView>
+            </View>
+          </EventView>
         </View>
-        <View
-          style={{ width: 100, height: 100, backgroundColor: 'orange' }}
-        ></View>
       </EventView>
 
       <Button

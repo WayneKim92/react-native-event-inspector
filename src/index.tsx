@@ -45,7 +45,7 @@ interface EventViewProps {
   nativeID: string;
 }
 
-// 재귀적으로 하기, 반복을 해야 한다. 그리고 탈출 할 수 있어야 한다.
+// @ts-ignore
 export function EventView(props: EventViewProps) {
   if (props.children === undefined) {
     return null;
@@ -59,18 +59,22 @@ export function EventView(props: EventViewProps) {
       return cloneElement(result, {
         children: EventView({
           children: result.props.children,
-          nativeID: props.nativeID,
+          nativeID: props.children.props.nativeID ?? props.nativeID,
         }),
       });
     }
   } else if (Children.count(props.children) > 1) {
     result = Children.map(props.children, (child) => {
-      return EventView({ children: child, nativeID: props.nativeID });
+      return EventView({
+        children: child,
+        nativeID: child.props.nativeID ?? props.nativeID,
+      });
     });
   }
 
   return result;
 }
+
 /*
   Target
   1. 사전에 정의 된 내용을 기반으로 이벤트를 추적 할 수 있다.
