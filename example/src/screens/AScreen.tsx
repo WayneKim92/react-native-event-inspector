@@ -20,35 +20,41 @@ export function AScreen() {
           nativeID={'red-button'}
         />
       </View>
-      <EventView eventName={'multi-box'}>
+      <EventView nativeID={'multi-box'}>
         <View
           style={{
             width: 100,
-            height: 20,
-            backgroundColor: 'black',
-            // flexDirection: 'row',
+            height: 100,
+            backgroundColor: 'pink',
+            justifyContent: 'space-between',
           }}
         >
-          <View style={{ width: 50, height: 20, backgroundColor: 'red' }} />
-          <View style={{ width: 50, height: 20, backgroundColor: 'blue' }} />
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+          >
+            <View
+              style={{ width: 30, height: 30, backgroundColor: '#111111' }}
+            />
+            <View
+              style={{ width: 30, height: 30, backgroundColor: '#444444' }}
+            />
+          </View>
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+          >
+            <View
+              style={{ width: 30, height: 30, backgroundColor: '#777777' }}
+            />
+            <View
+              style={{ width: 30, height: 30, backgroundColor: '#AAAAAA' }}
+            />
+          </View>
         </View>
-
-        {/*<View style={{ width: 100, height: 20, backgroundColor: '#778877' }} />*/}
-        {/*<View style={{ width: 100, height: 20, backgroundColor: 'blue' }} />*/}
-        {/*<View style={{ width: 100, height: 20, backgroundColor: 'purple' }} />*/}
+        <View
+          style={{ width: 100, height: 100, backgroundColor: 'orange' }}
+        ></View>
       </EventView>
 
-      <View style={{ height: 50 }} />
-
-      <View
-        nativeID={'yellow-box'}
-        style={{ width: 100, height: 100, backgroundColor: 'yellow' }}
-      >
-        <View
-          nativeID={'green-box'}
-          style={{ width: 50, height: 50, backgroundColor: 'green' }}
-        />
-      </View>
       <Button
         title={'Go to C'}
         onPress={() => {

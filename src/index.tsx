@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
+import { Children, cloneElement } from 'react';
 
 interface RNEventInspectorProps {
   children: React.ReactElement;
@@ -41,38 +42,34 @@ export function RNEventInspector(props: RNEventInspectorProps) {
 
 interface EventViewProps {
   children: React.ReactElement;
-  eventName: string;
+  nativeID: string;
 }
 
 // 재귀적으로 하기, 반복을 해야 한다. 그리고 탈출 할 수 있어야 한다.
 export function EventView(props: EventViewProps) {
-  console.log('🐞props', props);
-  console.log('🐞props.children', props.children);
-  console.log('🐞props.children.length', props.children.length);
+  if (props.children === undefined) {
+    return null;
+  }
 
-  // 1. children에 아무것도 없어야 한다.
-  let clonedChildren;
+  let result;
 
-  if (props.children !== undefined && props.children.length > 0) {
-    console.log('🐞배열', props.children.length);
-    clonedChildren = React.Children.map(props.children, (child) => {
-      console.log('🐞배열 순회', child);
-      const clonedChild = EventView({
-        children: child,
-        eventName: props.eventName,
+  if (Children.count(props.children) === 1) {
+    result = cloneElement(props.children, { nativeID: props.nativeID });
+    if (result.props.children !== undefined) {
+      return cloneElement(result, {
+        children: EventView({
+          children: result.props.children,
+          nativeID: props.nativeID,
+        }),
       });
-
-      console.log('🐞배열 결과', clonedChild);
-      return clonedChild;
-    });
-  } else {
-    console.log('🐞하나', props.children);
-    clonedChildren = React.cloneElement(props.children, {
-      nativeID: props.eventName,
+    }
+  } else if (Children.count(props.children) > 1) {
+    result = Children.map(props.children, (child) => {
+      return EventView({ children: child, nativeID: props.nativeID });
     });
   }
 
-  return clonedChildren;
+  return result;
 }
 /*
   Target
