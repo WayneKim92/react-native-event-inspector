@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { View, Text, Button, Pressable } from 'react-native';
+import { View, Text, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { EventView } from 'react-native-event-inspector';
 
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { StackParamList } from '../App';
@@ -11,12 +12,6 @@ export function AScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text nativeID={'a-text'}>A</Text>
-      <View
-        // android 전용
-        aria-labelledby={'red-box'}
-        nativeID={'red-box'}
-        style={{ backgroundColor: 'red', width: 100, height: 100 }}
-      />
       <View nativeID={'red-button'}>
         <Button
           title={'Go to B'}
@@ -25,26 +20,35 @@ export function AScreen() {
           nativeID={'red-button'}
         />
       </View>
-      <Pressable
-        nativeID={'blue-box-container'}
-        onPress={() => console.log('!')}
+      <EventView eventName={'multi-box'}>
+        <View
+          style={{
+            width: 100,
+            height: 20,
+            backgroundColor: 'black',
+            // flexDirection: 'row',
+          }}
+        >
+          <View style={{ width: 50, height: 20, backgroundColor: 'red' }} />
+          <View style={{ width: 50, height: 20, backgroundColor: 'blue' }} />
+        </View>
+
+        {/*<View style={{ width: 100, height: 20, backgroundColor: '#778877' }} />*/}
+        {/*<View style={{ width: 100, height: 20, backgroundColor: 'blue' }} />*/}
+        {/*<View style={{ width: 100, height: 20, backgroundColor: 'purple' }} />*/}
+      </EventView>
+
+      <View style={{ height: 50 }} />
+
+      <View
+        nativeID={'yellow-box'}
+        style={{ width: 100, height: 100, backgroundColor: 'yellow' }}
       >
-        <>
-          <View
-            nativeID={'blue-box'}
-            style={{ width: 100, height: 100, backgroundColor: 'blue' }}
-          />
-          <View
-            nativeID={'yellow-box'}
-            style={{ width: 100, height: 100, backgroundColor: 'yellow' }}
-          >
-            <View
-              nativeID={'green-box'}
-              style={{ width: 50, height: 50, backgroundColor: 'green' }}
-            />
-          </View>
-        </>
-      </Pressable>
+        <View
+          nativeID={'green-box'}
+          style={{ width: 50, height: 50, backgroundColor: 'green' }}
+        />
+      </View>
       <Button
         title={'Go to C'}
         onPress={() => {
