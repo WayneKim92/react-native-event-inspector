@@ -51,27 +51,18 @@ export function EventView(props: EventViewProps) {
     return null;
   }
 
-  let result;
-
   if (Children.count(props.children) === 1) {
-    // @ts-ignore
-    result = cloneElement(props.children, { nativeID: props.nativeID });
-    return cloneElement(result, {
-      children: EventView({
-        children: result.props.children,
-        nativeID: props.nativeID,
-      }),
+    return cloneElement(props.children as React.ReactElement, {
+      nativeID: props.nativeID,
     });
   } else if (Children.count(props.children) > 1) {
-    result = Children.map(props.children, (child) => {
+    return Children.map(props.children as React.ReactElement[], (child) => {
       return EventView({
         children: child,
         nativeID: child.props.nativeID ?? props.nativeID,
       });
     });
   }
-
-  return result;
 }
 
 /*
