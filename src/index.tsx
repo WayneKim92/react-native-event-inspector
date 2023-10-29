@@ -41,7 +41,7 @@ export function RNEventInspector(props: RNEventInspectorProps) {
 }
 
 interface EventViewProps {
-  children: React.ReactElement;
+  children: React.ReactElement | React.ReactElement[];
   nativeID: string;
 }
 
@@ -54,15 +54,14 @@ export function EventView(props: EventViewProps) {
   let result;
 
   if (Children.count(props.children) === 1) {
+    // @ts-ignore
     result = cloneElement(props.children, { nativeID: props.nativeID });
-    if (result.props.children !== undefined) {
-      return cloneElement(result, {
-        children: EventView({
-          children: result.props.children,
-          nativeID: props.children.props.nativeID ?? props.nativeID,
-        }),
-      });
-    }
+    return cloneElement(result, {
+      children: EventView({
+        children: result.props.children,
+        nativeID: props.nativeID,
+      }),
+    });
   } else if (Children.count(props.children) > 1) {
     result = Children.map(props.children, (child) => {
       return EventView({

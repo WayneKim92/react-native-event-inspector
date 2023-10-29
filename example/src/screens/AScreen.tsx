@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { EventView } from 'react-native-event-inspector';
 
@@ -12,14 +12,6 @@ export function AScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text nativeID={'a-text'}>A</Text>
-      <View nativeID={'red-button'}>
-        <Button
-          title={'Go to B'}
-          color={'red'}
-          // @ts-ignore
-          nativeID={'red-button'}
-        />
-      </View>
       <EventView nativeID={'multi-box'}>
         <View
           style={{
@@ -42,12 +34,37 @@ export function AScreen() {
                   style={{ width: 30, height: 30, backgroundColor: 'blue' }}
                 />
               </EventView>
-              <View style={{ width: 30, height: 30, backgroundColor: 'red' }} />
+
+              {/*<View style={{ flexGrow: 1, backgroundColor: 'red' }} />*/}
+
               <EventView nativeID={'green-box'}>
                 <View
                   style={{ width: 30, height: 30, backgroundColor: 'green' }}
                 />
               </EventView>
+            </View>
+            <View nativeID={'red-button'}>
+              <Button
+                title={'Go to B'}
+                color={'red'}
+                // nativeID 미지원
+                onPress={() => {
+                  navigation.navigate('B');
+                  console.log(
+                    '🐞버튼은 nativeID props EevntView가 유효하지 않음'
+                  );
+                }}
+              />
+              <Pressable
+                onPress={() => {
+                  console.log('🐞EevntView가 유효함');
+                  navigation.navigate('B');
+                }}
+              >
+                <View
+                  style={{ width: 10, height: 10, backgroundColor: 'black' }}
+                />
+              </Pressable>
             </View>
           </EventView>
         </View>
