@@ -46,25 +46,42 @@ interface EventViewProps {
 }
 
 // @ts-ignore
-export function EventView(props: EventViewProps) {
-  if (props.children === undefined) {
+export function EventView({ children, nativeID }: EventViewProps) {
+  if (Children.count(children) === 0) {
+    console.log('🐞자식 없음');
     return null;
-  }
-
-  if (Children.count(props.children) === 1) {
-    return cloneElement(props.children as React.ReactElement, {
-      nativeID: props.nativeID,
+  } else if (Children.count(children) > 1) {
+    console.log('🐞현재 자식 2개 이상');
+    return Children.map(children, (child) => {
+      // 현자 자식의 자식의 개수?
+      // 현재 자식의 자식이 없다면?
+      if (Children.count(child) > 0) {
+      } else {
+        return cloneElement(child, {
+          nativeID,
+        });
+      }
     });
-  } else if (Children.count(props.children) > 1) {
-    return Children.map(props.children as React.ReactElement[], (child) => {
-      return EventView({
-        children: child,
-        nativeID: child.props.nativeID ?? props.nativeID,
+  } else if (Children.count(children) === 1) {
+    console.log('🐞현재 자식 1개');
+    if (Children.count(children.props.children) > 0) {
+      console.log('🐞현재 자식의 자식 1개 이상');
+      const child = EventView({
+        children: children.props.children,
+        nativeID: children.props.nativeID ?? nativeID,
       });
-    });
+      return cloneElement(children, {
+        children: child,
+        nativeID: children.props.nativeID ?? nativeID,
+      });
+    } else {
+      console.log('🐞현재 자식의 자식 없음');
+      return cloneElement(children, {
+        nativeID,
+      });
+    }
   }
 }
-
 /*
   Target
   1. 사전에 정의 된 내용을 기반으로 이벤트를 추적 할 수 있다.
