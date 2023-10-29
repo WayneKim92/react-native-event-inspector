@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, Button, Pressable } from 'react-native';
+import { View, Text, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { EventView } from 'react-native-event-inspector';
 
@@ -12,7 +12,7 @@ export function AScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text nativeID={'a-text'}>A</Text>
-      <EventView nativeID={'multi-box'}>
+      <EventView nativeID={'pink-box'}>
         <View
           style={{
             width: 100,
@@ -32,39 +32,58 @@ export function AScreen() {
               <EventView nativeID={'blue-box'}>
                 <View
                   style={{ width: 30, height: 30, backgroundColor: 'blue' }}
-                />
+                >
+                  <EventView nativeID={'orange-box'}>
+                    <View
+                      style={{
+                        width: 15,
+                        height: 15,
+                        backgroundColor: 'orange',
+                      }}
+                    >
+                      <EventView nativeID={'box-999999'}>
+                        <View
+                          style={{
+                            width: 10,
+                            height: 5,
+                            backgroundColor: 'red',
+                          }}
+                        />
+                        <View
+                          style={{
+                            width: 10,
+                            height: 5,
+                            backgroundColor: 'pink',
+                          }}
+                        />
+                        <View
+                          style={{
+                            width: 10,
+                            height: 5,
+                            backgroundColor: 'green',
+                          }}
+                        />
+                      </EventView>
+                    </View>
+                  </EventView>
+                </View>
               </EventView>
-
-              {/*<View style={{ flexGrow: 1, backgroundColor: 'red' }} />*/}
 
               <EventView nativeID={'green-box'}>
                 <View
                   style={{ width: 30, height: 30, backgroundColor: 'green' }}
-                />
+                >
+                  <EventView nativeID={'box-444444'}>
+                    <View
+                      style={{
+                        width: 15,
+                        height: 15,
+                        backgroundColor: '#444444',
+                      }}
+                    />
+                  </EventView>
+                </View>
               </EventView>
-            </View>
-            <View nativeID={'red-button'}>
-              <Button
-                title={'Go to B'}
-                color={'red'}
-                // nativeID 미지원
-                onPress={() => {
-                  navigation.navigate('B');
-                  console.log(
-                    '🐞버튼은 nativeID props EevntView가 유효하지 않음'
-                  );
-                }}
-              />
-              <Pressable
-                onPress={() => {
-                  console.log('🐞EevntView가 유효함');
-                  navigation.navigate('B');
-                }}
-              >
-                <View
-                  style={{ width: 10, height: 10, backgroundColor: 'black' }}
-                />
-              </Pressable>
             </View>
           </EventView>
         </View>
